@@ -11,7 +11,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
-      path: 'assets/translations',
+      path: 'assets/translation',
       startLocale: Locale('ar'),
       saveLocale: true,
       fallbackLocale: Locale('ar'),
@@ -27,20 +27,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-
-      ],
-
-      child: ScreenUtilInit(designSize: Size(390,884),
-        minTextAdapt: true,
-        builder:(context, child) =>  MaterialApp(
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          debugShowCheckedModeBanner: false,
-          home: ProductPage(),
-        ),
+    return ScreenUtilInit(designSize: Size(390,884),
+      minTextAdapt: true,
+      builder:(context, child) =>  MaterialApp(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        debugShowCheckedModeBanner: false,
+        home: ProductPage(),
       ),
     );
   }
