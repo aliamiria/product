@@ -19,7 +19,7 @@ class RemoteDataSourceProduct {
     ),
   );
 
-  Future<ProductModel> getProduct() async {
+  Future<ProductModel> getProducts() async {
     try {
       final response = await dio.get("/products");
       return ProductModel.fromJson(response.data);

@@ -11,7 +11,7 @@ class  ProductRepo {
   ProductRepo({required this.remoteDataSourceProduct});
   Future<Either<Failure,ProductModel>>   getProduct ()async {
      try {
-       final data=  await remoteDataSourceProduct.getProduct();
+       final data=  await remoteDataSourceProduct.getProducts();
        return Right(data);
      } on Exception catch (e) {
        return Left(ErrorHandler.mapExceptionToFailure(e));
