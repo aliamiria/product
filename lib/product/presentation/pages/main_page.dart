@@ -29,18 +29,15 @@ class _MainPageState extends State<MainPage> {
       icon: Icon(Icons.shopping_basket_outlined),
       label: "سلتي",
     ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.person_outline),
-      label: "حسابي",
-    ),
+    BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: "حسابي"),
   ];
- List<Widget> pages = [
-   HomePage(),
-   CategoryPage(),
-   FavoritePage(),
-   BasketPage(),
-   AccountPage(),
- ];
+  List<Widget> pages = [
+    HomePage(),
+    CategoryPage(),
+    FavoritePage(),
+    BasketPage(),
+    AccountPage(),
+  ];
   int currentIndex = 0;
 
   void changeIndex(int index) {
@@ -53,12 +50,22 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         leading: Image.asset(AssetConstants.logo,),
-        title: Text('سوقنا',style: TextStyle(color: AppColors.natural,fontWeight: FontWeight.bold
-        ),),
+        actionsPadding: EdgeInsets.all(20),
+        actionsIconTheme: IconThemeData(),
+        leading: Image.asset(AssetConstants.logo),
+        title: Text(
+          'سوقنا',
+          style: TextStyle(
+            fontSize: 20,
+            color: AppColors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         actions: [
-          Icon(Icons.notification_add),
-          Icon(Icons.shopping_basket)
+          Icon(Icons.notification_add_outlined),
+          SizedBox(width: 10),
+          Icon(Icons.shopping_basket_outlined),
+
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

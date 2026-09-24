@@ -6,4 +6,5 @@ class AppColors {
   static Color tertiary = Color(0xff0D9488);
   static Color natural = Color(0xff64748B);
   static Color white = Color(0xffffffff);
+  static Color black = Color(0xff000000);
 }
