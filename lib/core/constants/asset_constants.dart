@@ -7,4 +7,5 @@ class AssetConstants {
   static String gold ="assets/images/gold.png";
   static String pounds ="assets/images/pounds.png";
   static String setting ="assets/images/setting.png";
+  static String logo ="assets/images/setting.png";
 }
