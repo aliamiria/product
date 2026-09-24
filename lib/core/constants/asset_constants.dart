@@ -1,5 +1,5 @@
 class AssetConstants {
-  static String check ="assets/images/check.png";
+  static String location ="assets/images/home/location.png";
   static String counter ="assets/images/counter.png";
   static String bag ="assets/images/bag.png";
   static String change ="assets/images/change.png";

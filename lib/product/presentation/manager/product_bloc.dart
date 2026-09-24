@@ -3,7 +3,6 @@ import 'package:untitled10/core/state/request_state.dart';
 import 'package:untitled10/product/data/models/category_model.dart';
 import 'package:untitled10/product/data/models/product_model.dart';
 import 'package:untitled10/product/data/repositories/product_repo.dart';
-
 part 'product_event.dart';
 part 'product_state.dart';
 
