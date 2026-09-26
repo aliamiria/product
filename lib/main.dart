@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled10/core/theme/app_theme.dart';
+import 'package:untitled10/product/data/data_sources/remote_data_source_product.dart';
+import 'package:untitled10/product/data/repositories/product_repo.dart';
+import 'package:untitled10/product/presentation/manager/product_bloc.dart';
 import 'package:untitled10/product/presentation/pages/main_page.dart';
 import 'package:untitled10/product/presentation/pages/product_page.dart';
 
@@ -39,7 +42,9 @@ class MyApp extends StatelessWidget {
         darkTheme: darkTheme,
         themeMode: ThemeMode.light,
         debugShowCheckedModeBanner: false,
-        home: MainPage(),
+        home: MultiBlocProvider(providers: [
+          BlocProvider(create: (context) => ProductBloc(productRepo: ProductRepo(remoteDataSourceProduct: RemoteDataSourceProduct())),)
+        ],child: MainPage()),
       ),
     );
   }
