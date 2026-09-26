@@ -50,6 +50,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xffF8F9FF),
         actionsPadding: EdgeInsets.all(20),
         actionsIconTheme: IconThemeData(),
         leading: Image.asset(AssetConstants.logo),
@@ -76,6 +77,7 @@ class _MainPageState extends State<MainPage> {
         selectedItemColor: AppColors.primary,
         onTap: (value) => changeIndex(value),
       ),
+      body: pages[currentIndex],
     );
   }
 }

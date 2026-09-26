@@ -27,7 +27,7 @@ class TextFieldWidget extends StatelessWidget {
       ),
       child: TextField(
         cursorColor: AppColors.primary,
-        decoration: InputDecoration(suffixIcon: Icon(Icons.keyboard_voice_outlined),prefixIcon: Icon(Icons.search_outlined),border: InputBorder.none, hintText: hint),
+        decoration: InputDecoration(suffixIcon: Icon(Icons.keyboard_voice_outlined),prefixIcon: Icon(Icons.search_outlined),border: InputBorder.none, hintText: hint,hintStyle: TextStyle(fontSize: 14.sp)),
       ),
     );
   }
