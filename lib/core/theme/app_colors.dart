@@ -7,4 +7,5 @@ class AppColors {
   static Color natural = Color(0xff64748B);
   static Color white = Color(0xffffffff);
   static Color black = Color(0xff000000);
+  static Color backgroundScaffold = Color(0xffF8F9FF);
 }

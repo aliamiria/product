@@ -127,7 +127,8 @@ class RemoteDataSourceProduct {
   Future<List<String>> getNamesCategories() async {
     try {
       final response = await dio.get("/products/category-list");
-      return response.data;
+      List<String> data = List<String>.from(response.data);
+      return data ;
     } on DioException catch (e) {
       throw DioExceptionHandler.handle(e);
     }
