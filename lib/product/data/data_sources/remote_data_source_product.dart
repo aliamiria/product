@@ -116,7 +116,6 @@ class RemoteDataSourceProduct {
   Future<List<CategoryModel>> getCategory() async {
     try {
       final response = await dio.get("/products/categories");
-
       List<dynamic> categories = response.data;
       return categories.map((e) => CategoryModel.fromJson(e)).toList();
     } on DioException catch (e) {

@@ -6,6 +6,7 @@ class AppColors {
   static Color tertiary = Color(0xff0D9488);
   static Color natural = Color(0xff64748B);
   static Color white = Color(0xffffffff);
+  static Color pink = Color(0xffFFDADB);
   static Color black = Color(0xff000000);
   static Color backgroundScaffold = Color(0xffF8F9FF);
 }
