@@ -9,4 +9,6 @@ class AppColors {
   static Color pink = Color(0xffFFDADB);
   static Color black = Color(0xff000000);
   static Color backgroundScaffold = Color(0xffF8F9FF);
+  static Color gold = Color(0xffF59E0B);
+
 }

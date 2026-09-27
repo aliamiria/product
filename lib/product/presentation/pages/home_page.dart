@@ -6,7 +6,10 @@ import 'package:untitled10/core/state/request_state.dart';
 import 'package:untitled10/core/theme/app_colors.dart';
 import 'package:untitled10/product/presentation/pages/product_page.dart';
 import 'package:untitled10/product/presentation/widgets/card_section.dart';
+import 'package:untitled10/product/presentation/widgets/cube_widget.dart';
 import 'package:untitled10/product/presentation/widgets/important_category_section.dart';
+import 'package:untitled10/product/presentation/widgets/product_section.dart';
+import 'package:untitled10/product/presentation/widgets/product_widget.dart';
 import 'package:untitled10/product/presentation/widgets/text_field_widget.dart';
 import '../manager/product_bloc.dart';
 
@@ -103,136 +106,47 @@ class _HomePageState extends State<HomePage> {
           ),
           SliverToBoxAdapter(child: CardSection()),
           SliverToBoxAdapter(child: ImportantCategorySection()),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "الأكثر طلباً ومبيعاً",
-                    style: TextStyle(
-                      color: AppColors.black,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return ProductPage();
-                          },
-                        ),
-                      );
-                    },
-                    child: Text(
-                      "مشاهدة الكل",
-                      style: TextStyle(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13.sp,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          BlocBuilder<ProductBloc, ProductState>(
-            builder: (context, state) {
-              if (state.products.status == Status.loading) {
-                return SliverToBoxAdapter(
-                  child: Center(child: CircularProgressIndicator()),
-                );
-              } else if (state.products.status == Status.error) {
-                return SliverToBoxAdapter(
-                  child: Center(child: Text(state.products.error)),
-                );
-              } else if (state.products.status == Status.success) {
-                return SliverGrid(
-                  delegate: SliverChildBuilderDelegate(childCount: 4, (
-                    context,
-                    index,
-                  ) {
-                    final pro = state.products.data!.products[index];
-                    return Container(
-                      margin: EdgeInsets.all(8.r),
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0xff919191),
-                            offset: Offset(3, 3),
-                            blurRadius: 10,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsetsDirectional.symmetric(
-                              vertical: 20.h,
-                            ),
-                            width: 150.w,
-                            height: 205.h,
-                            decoration: BoxDecoration(
-                              color: Color(0x99e2dfff),
-                              borderRadius: BorderRadius.circular(12.r),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                  style: ButtonStyle(
-                                    backgroundColor: WidgetStatePropertyAll(
-                                      AppColors.white,
-                                    ),
-                                  ),
-                                  onPressed: () {},
-                                  icon: Icon(Icons.favorite_border),
-                                ),
-                                Image.network(
-                                  state
-                                      .products
-                                      .data!
-                                      .products[index]
-                                      .images[0],
-                                ),
-                              ],
-                            ),
-                          ),
-                          Text(
-                            pro.brand!,
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            pro.title,
-                            style: TextStyle(
-                              fontSize: 11.sp,
-                              color: AppColors.natural,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 170.w / 290.h,
-                  ),
-                );
-              } else {
-                return SliverToBoxAdapter(child: SizedBox.shrink());
-              }
-            },
-          ),
+    SliverToBoxAdapter(
+    child:
+    Padding(
+    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+    child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+    Text(
+    "الأكثر طلباً ومبيعاً",
+    style: TextStyle(
+    color: AppColors.black,
+    fontSize: 18.sp,
+    fontWeight: FontWeight.bold,
+    ),
+    ),
+    InkWell(
+    onTap: () {
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) {
+    return ProductPage();
+    },
+    ),
+    );
+    },
+    child: Text(
+    "مشاهدة الكل",
+    style: TextStyle(
+    color: AppColors.primary,
+    fontWeight: FontWeight.bold,
+    fontSize: 13.sp,
+    ),
+    ),
+    ),
+    ],
+    ),
+    ),
+    ),
+          ProductSection(),
+
         ],
       ),
     );
