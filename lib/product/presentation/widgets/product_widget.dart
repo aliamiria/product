@@ -71,16 +71,17 @@ class _ProductWidgetState extends State<ProductWidget> {
                 ],
               ),
             ),
-            Text(
-         widget.    brand,
+          Text(
+             widget.brand,
               style: TextStyle(
                 fontSize: 13.sp,
                 fontWeight: FontWeight.bold,
               ),
-            ),
+            ) ,
             Text(
               textAlign: TextAlign.center,
            widget.  title,
+              maxLines: 1,
               style: TextStyle(
                 fontSize: 10.sp,
                 color: AppColors.natural,
@@ -100,7 +101,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   ),
                   Text(
                  widget.rate.toString(),
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12.sp),
                   ),
                 ],
               ),
@@ -123,7 +124,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                         duration: Duration(seconds: 2),
                         backgroundColor: AppColors.primary,
                         content: Text(
-                          "تمت الاضافة: ${widget.brand}",
+                          "تمت الاضافة: ${widget.title}",
                           style: TextStyle(
                             color: AppColors.white,
                             fontSize: 15.sp,

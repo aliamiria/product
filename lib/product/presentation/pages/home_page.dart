@@ -123,14 +123,15 @@ class _HomePageState extends State<HomePage> {
     ),
     InkWell(
     onTap: () {
-    Navigator.push(
-    context,
-    MaterialPageRoute(
-    builder: (context) {
-    return ProductPage();
-    },
-    ),
-    );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: context.read<ProductBloc>(),
+            child: ProductPage(),
+          ),
+        ),
+      );
     },
     child: Text(
     "مشاهدة الكل",
