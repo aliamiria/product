@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:untitled10/product/presentation/pages/product%20_details_page.dart';
 
 import '../../../core/constants/asset_constants.dart';
 import '../../../core/state/request_state.dart';
@@ -69,11 +70,21 @@ class _ProductPageState extends State<ProductPage> {
                 brand:  pro.brand??pro.title,
                 price: pro.price,
                 rate: pro.rating,
-                onTap:
-                    () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                ),
+                onTap: () {
+                  final productBloc = context.read<ProductBloc>();
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => BlocProvider.value(
+                        value: productBloc,
+                        child: ProductDetailsPage(
+                          id: pro.id,
+                        ),
+                      ),
+                    ),
+                  );
+                },
               );
             }),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
