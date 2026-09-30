@@ -103,7 +103,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                             pro.tags[0],
                             style: TextStyle(color: AppColors.natural),
                           ),
-
+                        
                            Spacer(),
 
                           Container(

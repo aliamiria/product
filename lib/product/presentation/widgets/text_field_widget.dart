@@ -8,10 +8,11 @@ class TextFieldWidget extends StatelessWidget {
     required this.width,
     required this.height,
     required this.hint,
+    this.textEditingController, this.onChanged
   });
-
+   final void Function(String)? onChanged;
   final double width;
-
+ final TextEditingController? textEditingController;
   final double height;
 
   final String hint;
@@ -26,6 +27,8 @@ class TextFieldWidget extends StatelessWidget {
         color: AppColors.white,
       ),
       child: TextField(
+        onChanged:onChanged,
+        controller: textEditingController,
         cursorColor: AppColors.primary,
         decoration: InputDecoration(suffixIcon: Icon(Icons.keyboard_voice_outlined),prefixIcon: Icon(Icons.search_outlined),border: InputBorder.none, hintText: hint,hintStyle: TextStyle(fontSize: 14.sp)),
       ),

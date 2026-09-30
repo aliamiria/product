@@ -293,6 +293,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
     // Get Category Names
     on<GetNamesCategoriesEvent>((event, emit) async {
+
       emit(
         state.copyWith(
           namesCategory: RequestState(status: Status.loading),

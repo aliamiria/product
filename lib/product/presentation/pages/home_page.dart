@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled10/core/constants/asset_constants.dart';
-import 'package:untitled10/core/state/request_state.dart';
+
 import 'package:untitled10/core/theme/app_colors.dart';
 import 'package:untitled10/product/presentation/pages/product_page.dart';
 import 'package:untitled10/product/presentation/widgets/card_section.dart';
-import 'package:untitled10/product/presentation/widgets/cube_widget.dart';
+
 import 'package:untitled10/product/presentation/widgets/important_category_section.dart';
 import 'package:untitled10/product/presentation/widgets/product_section.dart';
-import 'package:untitled10/product/presentation/widgets/product_widget.dart';
+
 import 'package:untitled10/product/presentation/widgets/text_field_widget.dart';
 import '../manager/product_bloc.dart';
 
@@ -28,6 +28,8 @@ class _HomePageState extends State<HomePage> {
     context.read<ProductBloc>().add(GetCategoryEvent());
     context.read<ProductBloc>().add(GetProductsEvent());
   }
+
+  final TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +91,12 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextFieldWidget(
+                    onChanged: (p0) {
+                      context.read<ProductBloc>().add(
+                        SearchProductEvent(q: p0),
+                      );
+                    },
+                    textEditingController: textEditingController,
                     width: 295.w,
                     height: 50.h,
                     hint: "ابحث عن الماركات، العطور، الأزياء...",
@@ -106,48 +114,48 @@ class _HomePageState extends State<HomePage> {
           ),
           SliverToBoxAdapter(child: CardSection()),
           SliverToBoxAdapter(child: ImportantCategorySection()),
-    SliverToBoxAdapter(
-    child:
-    Padding(
-    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-    child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-    Text(
-    "الأكثر طلباً ومبيعاً",
-    style: TextStyle(
-    color: AppColors.black,
-    fontSize: 18.sp,
-    fontWeight: FontWeight.bold,
-    ),
-    ),
-    InkWell(
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => BlocProvider.value(
-            value: context.read<ProductBloc>(),
-            child: ProductPage(),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "الأكثر طلباً ومبيعاً",
+                    style: TextStyle(
+                      color: AppColors.black,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) {
+                            return BlocProvider.value(
+                              value: context.read<ProductBloc>(),
+                              child: ProductPage(),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "مشاهدة الكل",
+                      style: TextStyle(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13.sp,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-      );
-    },
-    child: Text(
-    "مشاهدة الكل",
-    style: TextStyle(
-    color: AppColors.primary,
-    fontWeight: FontWeight.bold,
-    fontSize: 13.sp,
-    ),
-    ),
-    ),
-    ],
-    ),
-    ),
-    ),
           ProductSection(),
-
         ],
       ),
     );

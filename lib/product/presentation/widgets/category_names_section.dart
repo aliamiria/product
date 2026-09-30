@@ -35,7 +35,7 @@ class _CategoryNamesSectionState extends State<CategoryNamesSection> {
             ));
           } else if (state.namesCategory.status == Status.error) {
             return Text(state.namesCategory.error);
-          } else {
+          } else  if(state.namesCategory.status== Status.success){
             return SizedBox(
               height: 50.h,
               child: ListView.builder(
@@ -73,6 +73,9 @@ class _CategoryNamesSectionState extends State<CategoryNamesSection> {
                 },
               ),
             );
+          }
+          else{
+            return SizedBox.shrink();
           }
         },
       ),
