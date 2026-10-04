@@ -23,8 +23,8 @@ class ProductState {
   final RequestState<List<String>> namesCategory;
 
   final RequestState<ProductModel> productsByCategory;
-
-  const ProductState({
+   final RequestState<int> counter ;
+  const ProductState( {
     this.products = const RequestState(),
     this.addProduct = const RequestState(),
     this.upDateProduct = const RequestState(),
@@ -36,6 +36,7 @@ class ProductState {
     this.categories = const RequestState(),
     this.namesCategory = const RequestState(),
     this.productsByCategory = const RequestState(),
+    this.counter =const RequestState()
   });
 
   ProductState copyWith({
@@ -50,6 +51,7 @@ class ProductState {
     RequestState<List<CategoryModel>>? categories,
     RequestState<List<String>>? namesCategory,
     RequestState<ProductModel>? productsByCategory,
+    RequestState<int>? counter,
   }) {
     return ProductState(
       products: products ?? this.products,
@@ -63,6 +65,7 @@ class ProductState {
       categories: categories ?? this.categories,
       namesCategory: namesCategory ?? this.namesCategory,
       productsByCategory: productsByCategory ?? this.productsByCategory,
+      counter: counter ?? this.counter,
     );
   }
 }

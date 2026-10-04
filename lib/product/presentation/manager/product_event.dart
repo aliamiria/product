@@ -45,6 +45,12 @@ class SortProductEvent extends ProductEvent{
 }
 class GetCategoryEvent extends ProductEvent{}
 class GetNamesCategoriesEvent extends ProductEvent{}
+class GetCounterEvent extends ProductEvent{}
+class SaveCounterEvent extends ProductEvent{
+  final int counter;
+
+  SaveCounterEvent({required this.counter});
+}
 class GetProductsByCategoriesEvent extends ProductEvent{
   final String name;
 

@@ -23,13 +23,14 @@ class _CategoryNamesSectionState extends State<CategoryNamesSection> {
         builder: (context, state) {
           if (state.namesCategory.status == Status.loading) {
             return Center(child: Shimmer.fromColors(
+
               baseColor: Colors.grey.shade300,
               highlightColor: Colors.grey.shade100,
               child: Column(
                 children: [
-                  Container(height: 50, color: Colors.white),
-                  const SizedBox(height: 16),
-
+                  Container(height: 50.h, color: Colors.white),
+                   SizedBox(height: 16.h),
+                  Container(height: 50.h, color: Colors.white),
                 ],
               ),
             ));

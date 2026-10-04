@@ -1,14 +1,31 @@
 import 'package:dartz/dartz.dart';
 import 'package:untitled10/core/errors/error_handler.dart';
 import 'package:untitled10/core/errors/failures.dart';
+import 'package:untitled10/product/data/data_sources/local_data_source_product.dart';
 import 'package:untitled10/product/data/data_sources/remote_data_source_product.dart';
 import 'package:untitled10/product/data/models/category_model.dart';
 import 'package:untitled10/product/data/models/product_model.dart';
 
 class  ProductRepo {
   final  RemoteDataSourceProduct remoteDataSourceProduct ;
-
-  ProductRepo({required this.remoteDataSourceProduct});
+   final LocalDataSourceProduct localDataSourceProduct;
+  ProductRepo(this.localDataSourceProduct, {required this.remoteDataSourceProduct});
+  Future<Either<Failure,int>> getCounter()async{
+          try {
+            final data = await localDataSourceProduct.getCounter();
+            return Right(data);
+          } on Exception catch (e) {
+            return Left(NetworkFailure(e.toString()));
+          }
+  }
+  Future<Either<Failure,Unit>> saveCounter(int x)async{
+    try {
+      final data = await localDataSourceProduct.saveCounter(x);
+      return Right(unit);
+    } on Exception catch (e) {
+      return Left(NetworkFailure(e.toString()));
+    }
+  }
   Future<Either<Failure,ProductModel>>   getProduct ()async {
      try {
        final data=  await remoteDataSourceProduct.getProducts();

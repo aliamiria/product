@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled10/core/constants/asset_constants.dart';
 
 import 'package:untitled10/core/theme/app_colors.dart';
@@ -25,12 +26,19 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    saveData();
     context.read<ProductBloc>().add(GetCategoryEvent());
     context.read<ProductBloc>().add(GetProductsEvent());
   }
+   Future<void> saveData()async{
+    final prefs =await SharedPreferences.getInstance();
+    prefs.setDouble('x', 500);
+   }
+  Future<double> getData()async{
+    final prefs =await SharedPreferences.getInstance();
 
-  final TextEditingController textEditingController = TextEditingController();
-
+   return prefs.getDouble('x')??0;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +48,7 @@ class _HomePageState extends State<HomePage> {
           SliverToBoxAdapter(
             child: Row(
               children: [
+
                 Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 10.w,
@@ -81,37 +90,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsetsDirectional.symmetric(
-                vertical: 10.h,
-                horizontal: 10.w,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextFieldWidget(
-                    onChanged: (p0) {
-                      context.read<ProductBloc>().add(
-                        SearchProductEvent(q: p0),
-                      );
-                    },
-                    textEditingController: textEditingController,
-                    width: 295.w,
-                    height: 50.h,
-                    hint: "ابحث عن الماركات، العطور، الأزياء...",
-                  ),
-                  IconButton(
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(AppColors.white),
-                    ),
-                    onPressed: () {},
-                    icon: Icon(Icons.filter_list_rounded),
-                  ),
-                ],
-              ),
-            ),
-          ),
+
           SliverToBoxAdapter(child: CardSection()),
           SliverToBoxAdapter(child: ImportantCategorySection()),
           SliverToBoxAdapter(
@@ -130,12 +109,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                   InkWell(
                     onTap: () {
+                      final bb=context.read<ProductBloc>();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (_) {
                             return BlocProvider.value(
-                              value: context.read<ProductBloc>(),
+                              value: bb,
                               child: ProductPage(),
                             );
                           },

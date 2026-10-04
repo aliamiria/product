@@ -40,7 +40,7 @@ class Product {
   final int id;
   final String title;
   final String description;
-  final Category category;
+  final Category? category;
   final double price;
   final double discountPercentage;
   final double rating;
@@ -52,7 +52,7 @@ class Product {
   final Dimensions dimensions;
   final String warrantyInformation;
   final String shippingInformation;
-  final AvailabilityStatus availabilityStatus;
+  final AvailabilityStatus? availabilityStatus;
   final List<Review> reviews;
   final ReturnPolicy returnPolicy;
   final int minimumOrderQuantity;
@@ -89,7 +89,7 @@ class Product {
     id: json["id"],
     title: json["title"],
     description: json["description"],
-    category: categoryValues.map[json["category"]]!,
+    category: categoryValues.map[json["category"]],
     price: json["price"]?.toDouble(),
     discountPercentage: json["discountPercentage"]?.toDouble(),
     rating: json["rating"]?.toDouble(),
@@ -101,7 +101,7 @@ class Product {
     dimensions: Dimensions.fromJson(json["dimensions"]),
     warrantyInformation: json["warrantyInformation"],
     shippingInformation: json["shippingInformation"],
-    availabilityStatus: availabilityStatusValues.map[json["availabilityStatus"]]!,
+    availabilityStatus: availabilityStatusValues.map[json["availabilityStatus"]],
     reviews: List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
     returnPolicy: returnPolicyValues.map[json["returnPolicy"]]!,
     minimumOrderQuantity: json["minimumOrderQuantity"],
