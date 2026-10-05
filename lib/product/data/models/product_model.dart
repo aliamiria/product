@@ -40,7 +40,7 @@ class Product {
   final int id;
   final String title;
   final String description;
-  final Category category;
+  final String category;
   final double price;
   final double discountPercentage;
   final double rating;
@@ -89,7 +89,7 @@ class Product {
     id: json["id"],
     title: json["title"],
     description: json["description"],
-    category: categoryValues.map[json["category"]]!,
+    category: json["category"],
     price: json["price"]?.toDouble(),
     discountPercentage: json["discountPercentage"]?.toDouble(),
     rating: json["rating"]?.toDouble(),
