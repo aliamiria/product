@@ -135,7 +135,7 @@ class _ProductPageState extends State<ProductPage> {
                       return ProductWidget(
                         image: pro.products[index].images[0],
                         title: pro.products[index].title,
-                        brand: 'ffff' ?? pro.products[index].title,
+                        brand: pro.products[index].brand??'not found',
                         price: pro.products[index].price,
                         rate: pro.products[index].rating,
                         onTap: () {

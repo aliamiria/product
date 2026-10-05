@@ -6,6 +6,7 @@ import 'package:untitled10/product/data/models/product_model.dart';
 import '../../../core/errors/dio_exception_handler.dart';
 
 class RemoteDataSourceProduct {
+
   final Dio dio = Dio(
     BaseOptions(
       baseUrl: 'https://dummyjson.com',
