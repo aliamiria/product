@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:untitled10/product/data/models/product_model.dart';
 import 'package:untitled10/product/presentation/pages/product%20_details_page.dart';
-
 import '../../../core/constants/asset_constants.dart';
 import '../../../core/state/request_state.dart';
 import '../../../core/theme/app_colors.dart';
 import '../manager/product_bloc.dart';
 import '../widgets/product_widget.dart';
 import '../widgets/text_field_widget.dart';
-import 'home_page.dart';
-
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
 
@@ -22,7 +18,6 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   @override
   void initState() {
-    // TODO: implement initState
     context.read<ProductBloc>().add(GetProductsEvent());
     super.initState();
   }
