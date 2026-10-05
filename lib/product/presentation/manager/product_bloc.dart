@@ -10,7 +10,18 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final ProductRepo productRepo;
 
   ProductBloc({required this.productRepo}) : super(ProductState()) {
-
+   on<SaveCounterEvent>((event, emit) async{
+     emit(state.copyWith(counter: RequestState(status: Status.loading)));
+     final data=await productRepo.saveCounter(event.counter);
+     data.fold((l) =>emit(state.copyWith(counter: RequestState(status: Status.error,error: l.message
+     ))) , (r) => emit(state.copyWith(counter: RequestState(status: Status.success,))));
+   } ,);
+   on<GetCounterEvent>((event, emit) async{
+     emit(state.copyWith(counter: RequestState(status: Status.loading)));
+     final data=await productRepo.getCounter();
+     data.fold((l) =>emit(state.copyWith(counter: RequestState(status: Status.error,error: l.message
+     ))) , (r) => emit(state.copyWith(counter: RequestState(status: Status.success,data: r))));
+   } ,);
     // Get All Products
     on<GetProductsEvent>((event, emit) async {
       emit(

@@ -58,7 +58,7 @@ class _CategoryPageState extends State<CategoryPage> {
                       } else if (state.categories.status == Status.success) {
                         return SizedBox(
                           width: 80.w,
-                          height: 484.h,
+                          height: 560.h,
                           child: ListView.builder(
                             itemCount: state.categories.data!.length,
                             itemBuilder: (context, index) {
@@ -68,9 +68,10 @@ class _CategoryPageState extends State<CategoryPage> {
                                   onSelected: (value) {
                                     setState(() {
                                       name = state.categories.data![index].name;
-
                                     });
-                                    context.read<ProductBloc>().add(GetProductsByCategoriesEvent(name: name));
+                                    context.read<ProductBloc>().add(
+                                      GetProductsByCategoriesEvent(name: name),
+                                    );
                                   },
 
                                   label: Column(
@@ -129,7 +130,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                     ],
                                   ),
 
-                                  selectedColor: AppColors.primary,
+                                  selectedColor: AppColors.natural,
                                   selected:
                                       name ==
                                       state.categories.data![index].name,
@@ -144,28 +145,40 @@ class _CategoryPageState extends State<CategoryPage> {
                       }
                     },
                   ),
+                  SizedBox(width: 15.w),
                   BlocBuilder<ProductBloc, ProductState>(
                     builder: (context, state) {
                       if (state.productsByCategory.status == Status.loading) {
-                             return  Shimmer.fromColors(child: Column(children: [
-                               SizedBox(height: 400,width: 50,),
-                             ],), baseColor: Colors.grey, highlightColor: Colors.white);
+                        return Shimmer.fromColors(
+                          baseColor: Colors.grey,
+                          highlightColor: Colors.white,
+                          child: Column(
+
+                            children: [SizedBox(height: 400, width: 50)],
+                          ),
+                        );
                       } else if (state.productsByCategory.status ==
                           Status.error) {
                         return Text(state.productsByCategory.error);
                       } else if (state.productsByCategory.status ==
                           Status.success) {
-                         if(name == '' ){
-                           return Text('No Category Selected');
-                         }
-                         if(state.productsByCategory.data!.products.isEmpty){
-                           return Center(child: Text('لا يوجد منتجات مختارة لهذا الصنف'),);
-                         }
+                        if (name == '') {
+                          return Text('No Category Selected');
+                        }
+                        if (state.productsByCategory.data!.products.isEmpty) {
+                          return Center(
+                            child: Padding(
+                              padding:  EdgeInsets.only(right: 40.0.r),
+                              child: Text('لا يوجد منتجات مختارة لهذا الصنف'),
+                            ),
+                          );
+                        }
                         return SizedBox(
                           height: 600.h,
                           width: 250.w,
                           child: ListView.builder(
-                            itemCount: state.productsByCategory.data!.products.length,
+                            itemCount:
+                                state.productsByCategory.data!.products.length,
                             itemBuilder: (context, index) {
                               return ProductWidget(
                                 image:
@@ -174,27 +187,32 @@ class _CategoryPageState extends State<CategoryPage> {
                                         .data!
                                         .products[index]
                                         .images[0],
-                                title:  state
-                                    .productsByCategory
-                                    .data!
-                                    .products[index]
-                                    .title,
-                                brand:  state
-                                    .productsByCategory
-                                    .data!
-                                    .products[index]
-                                    .brand ??'',
-                                price:  state
-                                    .productsByCategory
-                                    .data!
-                                    .products[index]
-                                    .price,
+                                title:
+                                    state
+                                        .productsByCategory
+                                        .data!
+                                        .products[index]
+                                        .title,
+                                brand:
+                                    state
+                                        .productsByCategory
+                                        .data!
+                                        .products[index]
+                                        .brand ??
+                                    '',
+                                price:
+                                    state
+                                        .productsByCategory
+                                        .data!
+                                        .products[index]
+                                        .price,
                                 onTap: () {},
-                                rate:  state
-                                    .productsByCategory
-                                    .data!
-                                    .products[index]
-                                    .rating,
+                                rate:
+                                    state
+                                        .productsByCategory
+                                        .data!
+                                        .products[index]
+                                        .rating,
                               );
                             },
                           ),
