@@ -3,18 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:untitled10/core/di/service_locator.dart';
 import 'package:untitled10/core/theme/app_theme.dart';
 import 'package:untitled10/counter/presentation/manager/counter_provider.dart';
-import 'package:untitled10/counter/presentation/pages/counter_page.dart';
-import 'package:untitled10/product/data/data_sources/local_data_source_product.dart';
-import 'package:untitled10/product/data/data_sources/remote_data_source_product.dart';
-import 'package:untitled10/product/data/repositories/product_repo.dart';
+
+import 'package:untitled10/network/presentation/manager/network_provider.dart';
+import 'package:untitled10/network/presentation/pages/network_page.dart';
+
+import 'package:untitled10/product/presentation/manager/favorite_provider.dart';
 import 'package:untitled10/product/presentation/manager/product_bloc.dart';
 
-import 'package:untitled10/product/presentation/pages/main_page.dart';
-import 'package:untitled10/product/presentation/pages/product_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,8 +29,10 @@ void main() async {
       supportedLocales: [Locale('ar'), Locale('en')],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => s1<ProductBloc>(),),
+          BlocProvider(create: (context) => s1<ProductBloc>()..add(GetProductsEvent()),),
           ChangeNotifierProvider(create: (context) => s1<CounterProvider>(),),
+          ChangeNotifierProvider(create: (context) => s1<FavoriteProvider>()..getFavorites(),),
+          ChangeNotifierProvider(create: (context) => s1<NetworkProvider>()..listenNetwork(),)
         ],
         child: MyApp(),
       ),
@@ -56,7 +57,7 @@ class MyApp extends StatelessWidget {
             darkTheme: darkTheme,
             themeMode: ThemeMode.light,
             debugShowCheckedModeBanner: false,
-            home: CounterPage()
+            home: NetworkPage()
           ),
     );
   }

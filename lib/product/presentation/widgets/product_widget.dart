@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:untitled10/product/presentation/manager/favorite_provider.dart';
 
 import '../../../core/theme/app_colors.dart';
 
 class ProductWidget extends StatefulWidget {
-   ProductWidget({super.key, required this.image, required this.title, required this.brand, required this.price,required this.onTap, required this.rate});
+    ProductWidget({super.key, required this.image, required this.title, required this.brand, required this.price,required this.onTap, required this.rate, required this.id});
    bool isFavorite = false;
    final String image;
    final String title;
    final String brand;
    final double price;
    final double rate;
+   final int id ;
    final void Function() onTap;
   @override
   State<ProductWidget> createState() => _ProductWidgetState();
@@ -50,19 +53,20 @@ class _ProductWidgetState extends State<ProductWidget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        widget.isFavorite = !widget.isFavorite;
-                      });
-                    },
-                    icon: Icon(
-                     widget. isFavorite
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: widget.isFavorite
-                          ? Colors.red
-                          : AppColors.natural,
+                  Consumer<FavoriteProvider>(
+
+                  builder:(context, value, child) =>  IconButton(
+                      onPressed: () {
+                       context.read<FavoriteProvider>().toggleFav(widget.id);
+                      },
+                      icon: Icon(
+                     value.isFav(widget.id)
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color:    value.isFav(widget.id)
+                            ? Colors.red
+                            : AppColors.natural,
+                      ),
                     ),
                   ),
                   Image.network(

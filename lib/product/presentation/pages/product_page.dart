@@ -128,6 +128,7 @@ class _ProductPageState extends State<ProductPage> {
                     childCount: pro!.products.length,
                     (context, index) {
                       return ProductWidget(
+                        id: pro.products[index].id,
                         image: pro.products[index].images[0],
                         title: pro.products[index].title,
                         brand: pro.products[index].brand??'not found',

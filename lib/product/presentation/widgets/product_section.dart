@@ -28,6 +28,7 @@ class ProductSection extends StatelessWidget {
                 index,) {
               final pro = state.products.data!.products[index];
               return ProductWidget(
+                id: pro.id,
                 image: pro.images[0],
                 title: pro.title,
                 brand: pro.brand!,

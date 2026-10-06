@@ -181,6 +181,10 @@ class _CategoryPageState extends State<CategoryPage> {
                                 state.productsByCategory.data!.products.length,
                             itemBuilder: (context, index) {
                               return ProductWidget(
+                                id:  state
+                                    .productsByCategory
+                                    .data!
+                                    .products[index].id,
                                 image:
                                     state
                                         .productsByCategory
