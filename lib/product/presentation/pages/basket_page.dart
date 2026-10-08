@@ -111,7 +111,7 @@ class _BasketPageState extends State<BasketPage> {
                   },
                 ),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 150.w / 290.h,
+                  childAspectRatio: 148.w / 290.h,
                   crossAxisCount: 2,
                 ),
               );

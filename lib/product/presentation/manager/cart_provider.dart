@@ -11,14 +11,14 @@ class CartProvider extends ChangeNotifier {
   bool isAdd(int id){
     return add.contains(id);
   }
-  Future<bool> toggle (int id)async {
-    if (isAdd(id)) {
-      return false;
+  Future<void> toggle (int id)async {
+    if (!isAdd(id)) {
+      add.add(id);
     }
-    add.add(id);
+
     notifyListeners();
     await localDataSourceCart.savedCart(add);
-    return true;
+
   }
   Future<void> remove(int id) async {
     add.remove(id);

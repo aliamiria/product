@@ -48,7 +48,7 @@ class ProductSection extends StatelessWidget {
             }),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio: 150.w / 290.h,
+              childAspectRatio: 148.w / 290.h,
             ),
           );
         }
