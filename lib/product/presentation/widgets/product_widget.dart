@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:untitled10/product/presentation/manager/favorite_provider.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../manager/cart_provider.dart';
 
 class ProductWidget extends StatefulWidget {
     ProductWidget({super.key, required this.image, required this.title, required this.brand, required this.price,required this.onTap, required this.rate, required this.id});
@@ -111,46 +112,54 @@ class _ProductWidgetState extends State<ProductWidget> {
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  '\$${widget.price}',
-                  style: TextStyle(
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17.sp,
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Text(
+                    '\$${widget.price}',
+                    style: TextStyle(
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17.sp,
+                    ),
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        duration: Duration(seconds: 2),
-                        backgroundColor: AppColors.primary,
-                        content: Text(
-                          "تمت الاضافة: ${widget.title}",
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                  child:Consumer<CartProvider>(builder: (context, value, child) =>IconButton(
+                    icon: Container(
+                      height: 35.h,
+                      width: 35.w,
+                      decoration: BoxDecoration(
+                        color: Color(0x99e2dfff).withAlpha(120),
+                        borderRadius: BorderRadius.circular(10.r),
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 35.h,
-                    width: 35.w,
-                    decoration: BoxDecoration(
-                      color: Color(0x99e2dfff).withAlpha(120),
-                      borderRadius: BorderRadius.circular(10.r),
+                      child: Icon(
+                        Icons.add,
+                        color: AppColors.primary,
+                      ),
                     ),
-                    child: Icon(
-                      Icons.add,
-                      color: AppColors.primary,
-                    ),
-                  ),
-                ),
+                    onPressed: (){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          duration: Duration(seconds: 2),
+                          backgroundColor: AppColors.primary,
+                          content:
+                          Text(
+                            "تمت الاضافة: ${widget.title}",
+                            style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      );
+                      context.read<CartProvider>().toggle(widget.id);
+                    },
+
+                  ) ,)),
+
               ],
             ),
           ],

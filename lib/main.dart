@@ -10,9 +10,14 @@ import 'package:untitled10/counter/presentation/manager/counter_provider.dart';
 
 import 'package:untitled10/network/presentation/manager/network_provider.dart';
 import 'package:untitled10/network/presentation/pages/network_page.dart';
+import 'package:untitled10/product/presentation/manager/cart_provider.dart';
+
 
 import 'package:untitled10/product/presentation/manager/favorite_provider.dart';
 import 'package:untitled10/product/presentation/manager/product_bloc.dart';
+import 'package:untitled10/product/presentation/pages/favorite_page.dart';
+import 'package:untitled10/product/presentation/pages/home_page.dart';
+import 'package:untitled10/product/presentation/pages/main_page.dart';
 
 
 void main() async {
@@ -32,7 +37,8 @@ void main() async {
           BlocProvider(create: (context) => s1<ProductBloc>()..add(GetProductsEvent()),),
           ChangeNotifierProvider(create: (context) => s1<CounterProvider>(),),
           ChangeNotifierProvider(create: (context) => s1<FavoriteProvider>()..getFavorites(),),
-          ChangeNotifierProvider(create: (context) => s1<NetworkProvider>()..listenNetwork(),)
+          ChangeNotifierProvider(create: (context) => s1<CartProvider>()..getAdd()),
+          ChangeNotifierProvider(create: (context) => s1<InternetProvider>())
         ],
         child: MyApp(),
       ),
@@ -57,7 +63,7 @@ class MyApp extends StatelessWidget {
             darkTheme: darkTheme,
             themeMode: ThemeMode.light,
             debugShowCheckedModeBanner: false,
-            home: NetworkPage()
+            home: MainPage()
           ),
     );
   }
