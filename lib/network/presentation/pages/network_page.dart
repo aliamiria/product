@@ -1,46 +1,46 @@
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:untitled10/network/presentation/manager/network_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class NetworkPage extends StatefulWidget {
-  const NetworkPage({super.key});
+import '../manager/network_provider.dart';
 
-  @override
-  State<NetworkPage> createState() => _NetworkPageState();
+class NetworkPage extends StatelessWidget {
+const NetworkPage({super.key});
+
+@override
+Widget build(BuildContext context) {
+final isConnected =
+context.watch<InternetProvider>().isConnected;
+
+WidgetsBinding.instance.addPostFrameCallback((_) {
+ScaffoldMessenger.of(context).showSnackBar(
+SnackBar(
+content: Text(
+isConnected
+? 'أنت متصل بالإنترنت'
+    : 'ما في اتصال بالإنترنت',
+),
+duration: const Duration(seconds: 2),
+),
+);
+});
+
+return Scaffold(
+appBar: AppBar(
+title: Text(
+isConnected
+? 'في إنترنت'
+    : 'ما في إنترنت',
+),
+),
+
+body: const Center(
+child: Text(
+'مراقبة الاتصال بالإنترنت',
+style: TextStyle(fontSize: 20),
+),
+),
+);
+}
 }
 
-class _NetworkPageState extends State<NetworkPage> {
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    super.initState();
-
-  }
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          Consumer<NetworkProvider>(
-
-            builder:(context, value, child) {
-              if (!value.isConnected) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('No Internet ❌'),
-                  ),
-                );
-              }
-              return Center(
-                child: Text('${value.isConnected}'),
-            );
-            },
-          )
-        ],
-      ),
-    );
-
-  }
-}
